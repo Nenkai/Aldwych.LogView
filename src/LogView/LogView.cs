@@ -94,15 +94,19 @@ namespace Aldwych.Controls
 
         public LogView()
         {
+            // TODO: Make this better, allow clearing
+            /*
             var sl = LogCatcher.LogEntryObservable.ToObservableChangeSet(limitSizeTo: 2000).AsObservableList();
             var dynamicFilter = this.WhenAnyValue(x => x.LogLevelFilter).Select(x => CreatePredicate(x));
             var loader = sl.Connect().DisposeMany().Filter(dynamicFilter).Sort(SortExpressionComparer<LogItemViewModel>.Ascending(i => i.Created)).Bind(out var logItems).Subscribe();
-            LogItems = logItems;
-            LogCatcher.LogEntryObservable.Subscribe(x =>
+            */
+            LogItems = new ReadOnlyObservableCollection<LogItemViewModel>(LogCatcher.LogItems);
+
+            LogCatcher.LogItems.CollectionChanged += (sender, args) =>
             {
                 SelectedItem = LogItems.LastOrDefault();
                 ScrollToEnd();
-            });
+            };
         }
 
         public void ScrollToEnd()

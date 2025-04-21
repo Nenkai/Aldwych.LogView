@@ -40,6 +40,4 @@ namespace Aldwych.Logging
             }
         }
     }
-
-   
 }

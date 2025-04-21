@@ -10,13 +10,11 @@ namespace Aldwych.Logging.ViewModels
 {
     public class LogItemViewModel : ReactiveObject
     {
-
         public LogLevel LogLevel
         {
             get => _logLevel;
             set => this.RaiseAndSetIfChanged(ref _logLevel, value);
         }
-
 
         public EventId EventId
         {
@@ -36,20 +34,17 @@ namespace Aldwych.Logging.ViewModels
             set => this.RaiseAndSetIfChanged(ref _exception, value);
         }
 
-
         public object State
         {
             get => _state;
             set => this.RaiseAndSetIfChanged(ref _state, value);
         }
 
-
         public string Message
         {
             get => _message;
             set => this.RaiseAndSetIfChanged(ref _message, value);
         }
-
 
         public DateTime Created
         {
@@ -64,7 +59,7 @@ namespace Aldwych.Logging.ViewModels
         }
 
 
-        public IBrush Foreground
+        public IBrush? Foreground
         {
             get => _foreground;
             set => this.RaiseAndSetIfChanged(ref _foreground, value);
@@ -82,7 +77,7 @@ namespace Aldwych.Logging.ViewModels
             Foreground = BrushForLogLevel(LogLevel);
 
             _iconPath = IconPathForLogLevel(LogLevel);
-            _assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+            //_assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
         }
 
 
@@ -136,7 +131,7 @@ namespace Aldwych.Logging.ViewModels
         }
 
         private readonly IAssetLoader _assets;
-        private IBrush _foreground;
+        private IBrush? _foreground;
         private StreamGeometry _iconPath;
         private DateTime _created;
         private string _message;
